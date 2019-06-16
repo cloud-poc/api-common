@@ -21,6 +21,7 @@ public class BusinessException extends RuntimeException implements Serializable 
 	public BusinessException(String code, String message) {
 		super(message);
 		this.code = code;
+		this.message = message;
 	}
 
 	public BusinessException(String message, String code, Throwable e) {
