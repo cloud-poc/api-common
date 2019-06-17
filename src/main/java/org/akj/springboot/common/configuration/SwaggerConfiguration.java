@@ -3,6 +3,7 @@ package org.akj.springboot.common.configuration;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+@ConditionalOnProperty(value = "swagger.api.enabled")
 public class SwaggerConfiguration {
 	@Value("${swagger.api.title}")
 	private String title;
@@ -45,7 +47,7 @@ public class SwaggerConfiguration {
 	public Docket api() {
 
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage(basePackage))
-				.paths(regex("/**")).build().apiInfo(metaData());
+				.paths(regex("/*.*")).build().apiInfo(metaData());
 
 	}
 
